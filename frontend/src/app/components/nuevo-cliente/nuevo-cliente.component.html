@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/clientes']"><i class="fa fa-group"></i>&nbsp;Clientes</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/clientes/nuevo']"><i class="fa fa-user"></i>&nbsp;Nuevo Cliente</a></b></li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="box box-success mb-3 container">
+                <div class="box-header with-border">
+                    <div style="float: right;">
+                        <button class="btn btn-danger btn-sm" [routerLink]="['/clientes']">Regresar</button>
+                    </div>
+                    <div class="text-center">
+                        <h1>Nuevo Cliente</h1>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form (ngSubmit)="guardar()" #forma="ngForm">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group form-row">
+                                    <label for="ci">Cédula: </label>
+                                    <input type="text" id="ci" class="form-control" name="ci" [(ngModel)]="cliente.ci" required>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="nombre">Nombre: </label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="cliente.nombre" required>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="apellido">Apellido: </label>
+                                    <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="cliente.apellido" required>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="correo">Correo: </label>
+                                    <input type="emal" class="form-control" name="correo" id="correo" [(ngModel)]="cliente.correo">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group form-row">
+                                    <label for="telefono">Teléfono: </label>
+                                    <input type="text" class="form-control" name="telefono" [(ngModel)]="cliente.telefono">
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="direccion">Dirección: </label>
+                                    <textarea name="direccion" class="form-control" cols="30" rows="8" [(ngModel)]="cliente.direccion"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error == true">
+                                    <strong>¡ERROR!</strong> Ha ocurrido un problema desconocido, intente más tarde.
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-success" type="submit" [disabled]="!forma.valid">Registrar&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="animated fadeIn">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>&nbsp;Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/clientes']"><i class="fa fa-group"></i>&nbsp;Clientes</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/cliente', mascota.id_cliente]"><i class="fa fa-user"></i>&nbsp;{{cliente}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/cliente/mascotas/agregar', mascota.id_cliente]"><i class="fa fa-paw"></i>&nbsp;Agregar Mascota</a></b></li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="container box box-success mb-3">
+                <div class="box-header with-border">
+                    <div style="float: right;">
+                        <button class="btn btn-danger btn-sm" [routerLink]="['/cliente', mascota.id_cliente]">Regresar</button>
+                    </div>
+                    <h5><b>Cliente: </b>{{cliente}}</h5>
+                    <div class="text-center">
+                        <h3>Agregar Mascota</h3>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form (ngSubmit)="guardar()" #forma="ngForm">
+                        <input type="hidden" class="form-control" name="id_cliente" [(ngModel)]="mascota.id_cliente" required disabled>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group form-row">
+                                    <label for="nombre">Nombre: </label>
+                                    <input type="text" class="form-control" name="nombre" [(ngModel)]="mascota.nombre">
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="tipo">Tipo:</label>
+                                    <select class="form-control" id="tipo" [(ngModel)]="mascota.tipo" name="tipo">
+                                                            <option value="">Elija una opción...</option>
+                                                            <option value="Perro">Perro</option>
+                                                            <option value="Gato">Gato</option>
+                                                            </select>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="raza">Raza: </label>
+                                    <input type="text" class="form-control" name="raza" [(ngModel)]="mascota.raza">
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="edad">Edad: </label>
+                                    <input type="text" class="form-control" name="edad" [(ngModel)]="mascota.edad">
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="tamano">Tamaño: </label>
+                                    <input type="text" class="form-control" name="tamano" [(ngModel)]="mascota.tamano">
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="peso">Peso: </label>
+                                    <input type="text" class="form-control" name="peso" [(ngModel)]="mascota.peso">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group form-row">
+                                    <label for="descripcion">Descripcion: </label>
+                                    <textarea name="descripcion" class="form-control" cols="30" rows="8" [(ngModel)]="mascota.descripcion"></textarea>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="antecedentes">Antecedentes: </label>
+                                    <textarea name="antecedentes" class="form-control" cols="30" rows="9" [(ngModel)]="mascota.antecedentes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-center">
+                                    <button class="btn btn-success" type="submit" [disabled]="!forma.valid">Registrar Mascota</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

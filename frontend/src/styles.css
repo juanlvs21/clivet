@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+@keyframes lds-blocks {
+    0% {
+        background: #5bc0de;
+    }
+    12.5% {
+        background: #5bc0de;
+    }
+    12.625% {
+        background: #337ab7;
+    }
+    100% {
+        background: #337ab7;
+    }
+}
+
+@-webkit-keyframes lds-blocks {
+    0% {
+        background: #5bc0de;
+    }
+    12.5% {
+        background: #5bc0de;
+    }
+    12.625% {
+        background: #337ab7;
+    }
+    100% {
+        background: #337ab7;
+    }
+}
+
+.lds-blocks {
+    position: relative;
+}
+
+.lds-blocks div {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #337ab7;
+    -webkit-animation: lds-blocks 1s linear infinite;
+    animation: lds-blocks 1s linear infinite;
+}
+
+.lds-blocks {
+    width: 60px !important;
+    height: 60px !important;
+    -webkit-transform: translate(-30px, -30px) scale(0.3) translate(30px, 30px);
+    transform: translate(-30px, -30px) scale(0.3) translate(30px, 30px);
+}

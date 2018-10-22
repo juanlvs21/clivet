@@ -1,0 +1,123 @@
+<div class="animated fadeIn">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/clientes']"><i class="fa fa-group"></i>&nbsp;Clientes</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/cliente', id_cliente]"><i class="fa fa-user"></i>&nbsp;{{cliente.nombre}}</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/mascota', id]"><i class="fa fa-paw"></i>&nbsp;{{mascota.nombre}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/mascota', id ,'vacunas']"><i class="fa fa-plus"></i>&nbsp;Vacunas</a></li>
+        </ol>
+    </nav>
+
+    <div class="col-md-2 offset-md-5 col-sm-2 offset-sm-5" *ngIf="cargando">
+        <div class="lds-css ng-scope" style="width: 50px; height: 50px; margin-left:20px">
+            <div class="lds-blocks" style="width:100%;height:100%">
+                <div style="left:30px;top:30px;animation-delay:0s"></div>
+                <div style="left:80px;top:30px;animation-delay:0.125s"></div>
+                <div style="left:130px;top:30px;animation-delay:0.25s"></div>
+                <div style="left:30px;top:80px;animation-delay:0.875s"></div>
+                <div style="left:130px;top:80px;animation-delay:0.375s"></div>
+                <div style="left:30px;top:130px;animation-delay:0.75s"></div>
+                <div style="left:80px;top:130px;animation-delay:0.625s"></div>
+                <div style="left:130px;top:130px;animation-delay:0.5s"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="invoice">
+        <div style="float: right;">
+            <button class="btn btn-danger" [routerLink]="['/consulta', id]">Regresar</button>
+        </div>
+        <!-- title row -->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="page-header">
+                    &nbsp; &nbsp;
+                    <i class="fa fa-paw"></i> {{ mascota.nombre }}
+                    <!-- <small class="pull-right"> {{mascota.fecha_creacion}}</small> -->
+                </h2>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{totalvacunas}} </h3>
+  
+                        <p>Vacunas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <div class="card">
+                <div class="card-body" style="margin-top:20px">
+                  <form #formVacuna="ngForm">
+                    <input type="hidden" name="id_mascot" id="id_mascot" [(ngModel)]="vacuna.id_mascota" required>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="vacuna" id="vacuna" [(ngModel)]="vacuna.nombre" placeholder="Nombre Vacuna" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="form-group">
+                                <input type="date" class="form-control" max="2018-10-16" name="fecha" id="feca" [(ngModel)]="vacuna.fecha" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group text-right">
+                                <button class="btn btn-success btn-sm" (click)="agregarVacuna(formVacuna)" >Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th class="text-center">Vacuna</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let vacuna of vacunas">
+                          <td class="text-center">{{ vacuna.nombre }}</td>
+                          <td class="text-center">{{ vacuna.fecha | date:"dd/MM/yy" }}</td>
+                          <td class="text-center">
+                              <button class="btn btn-danger btn-sm tooltip-test" title="Eliminar Vacuna" (click)="deleteVacuna(vacuna.id)" [disabled]="eliminando == vacuna.id" >
+                                  <i class="fa fa-trash"></i>
+                                  <i class="fa fa-refresh fa-spin ml-1" *ngIf="eliminando == vacuna.id"></i>
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-md-2 offset-md-5 col-sm-2 offset-sm-5" *ngIf="guardandovacuna">
+              <div class="lds-css ng-scope" style="width: 50px; height: 50px;">
+                  <div class="lds-blocks" style="width:100%;height:100%">
+                      <div style="left:30px;top:30px;animation-delay:0s"></div>
+                      <div style="left:80px;top:30px;animation-delay:0.125s"></div>
+                      <div style="left:130px;top:30px;animation-delay:0.25s"></div>
+                      <div style="left:30px;top:80px;animation-delay:0.875s"></div>
+                      <div style="left:130px;top:80px;animation-delay:0.375s"></div>
+                      <div style="left:30px;top:130px;animation-delay:0.75s"></div>
+                      <div style="left:80px;top:130px;animation-delay:0.625s"></div>
+                      <div style="left:130px;top:130px;animation-delay:0.5s"></div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
+</div>

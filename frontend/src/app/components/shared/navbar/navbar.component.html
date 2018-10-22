@@ -1,0 +1,111 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a [routerLink]="['inicio']" class="logo" *ngIf="clivet.id_user != ''">
+        <span class="logo-mini">
+                <img src="assets/img/logo.png" width="40" height="40">
+            </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+                <img src="assets/img/logo.png" width="40" height="40">
+                <b>Cli</b>Vet</span>
+    </a>
+    <a class="logo" *ngIf="clivet.id_user == ''">
+        <span class="logo-mini">
+                <img src="assets/img/logo.png" width="40" height="40">
+            </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+                <img src="assets/img/logo.png" width="40" height="40">
+                <b>Cli</b>Vet</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" style="height: 10px;">
+        <!-- Sidebar toggle button-->
+        <a class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li *ngIf="clivet.id_user != ''">
+                    <a (click)="salir()" [routerLink]="['/sesion']" class="btn btn-outline-danger" title="Cerrar Sesión"><i class="fa fa-sign-out"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div *ngIf="clivet.id_user != ''">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="assets/img/perfil.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="#"><i class="fa fa-star text-success"></i> Medico</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <!-- <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div>
+            </form> -->
+            <!-- /.search form -->
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header" *ngIf="clivet.id_user != ''">MENÚ DE NAVEGACIÓN</li>
+            <li class="header" *ngIf="clivet.id_user == ''">BIENVENIDO</li>
+            <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
+                <a [routerLink]="['inicio']">
+                    <i class="fa fa-home"></i> <span>Inicio</span>
+                    <!-- <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                    </span> -->
+                </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
+                <a [routerLink]="['clientes']">
+                    <i class="fa fa-users"></i> <span>Clientes</span>
+                    <!-- <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                    </span> -->
+                </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
+                <a [routerLink]="['consultas']">
+                    <i class="fa fa-heart"></i> <span>Consultas</span>
+                    <!-- <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                    </span> -->
+                </a>
+            </li>
+            <!-- <li class="header" *ngIf="clivet.id_user != ''">SESIÓN</li>
+            <li *ngIf="clivet.id_user != ''">
+                <a (click)="salir()">
+                    <i class="fa fa-sign-out"></i> <span>Salir</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                    </span>
+                </a>
+            </li> -->
+            <li routerLinkActive="active" *ngIf="clivet.id_user == ''">
+                <a (click)="salir()" [routerLink]="['/sesion']">
+                    <i class="fa fa-sign-in"></i> <span>Iniciar Sesión</span>
+                    <!-- <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                    </span> -->
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

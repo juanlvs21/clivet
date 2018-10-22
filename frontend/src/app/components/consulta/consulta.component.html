@@ -1,0 +1,90 @@
+<div class="animated fadeIn">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>&nbsp;Inicio</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/consultas']"><i class="fa fa-heart"></i>&nbsp;Consultas</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/consulta', id]"><i class="fa fa-calendar"></i>&nbsp;{{mascota.nombre}} <small>{{consulta.fecha | date:"dd/MM/yyyy"}}</small></a></b></li>
+      </ol>
+  </nav>
+
+  <section class="invoice">
+    <div style="float: right;">
+        <button class="btn btn-danger" [routerLink]="['/consultas']">Regresar</button>
+    </div>
+    <!-- title row -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                &nbsp; &nbsp;
+                <i class="fa fa-paw"></i> {{ mascota.nombre }}&nbsp;&nbsp;
+                <small class="pull-right"> <i class="fa fa-calendar"></i> {{ consulta.fecha | date:"dd/MM/yyyy" }}</small>
+            </h2>
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{totalvacunas}} </h3>
+    
+                        <p>Vacunas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    <a class="small-box-footer" [routerLink]="['/consulta', id ,'vacunas', mascota.id]" >
+                        Ver Vacunas <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3> {{totaldetalles}} </h3>
+                        <p class="small-box-footer">Consultas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-heart"></i>
+                    </div>
+                    <a class="small-box-footer" [routerLink]="['/consulta', id ,'historia', mascota.id]" >
+                        Ver Consultas <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Raza</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Tamaño</th>
+                    <th scope="col">Peso</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Antecedentes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>{{ mascota.tipo }}</th>
+                    <td>{{ mascota.raza }}</td>
+                    <td>...</td>
+                    <td>{{ mascota.edad }}</td>
+                    <td>{{ mascota.tamano }}</td>
+                    <td>{{ mascota.peso }}</td>
+                    <td>{{ mascota.descripcion }}</td>
+                    <td>{{ mascota.antecedentes }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <!-- /.row -->
+  </section>
+</div>
