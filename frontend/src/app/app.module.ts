@@ -19,7 +19,6 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { MascotasComponent } from './components/mascotas/mascotas.component';
 import { MascotaComponent } from './components/mascota/mascota.component';
-import { HistoriaComponent } from './components/historia/historia.component';
 import { ConsultasComponent } from './components/consultas/consultas.component';
 import { NuevoClienteComponent } from './components/nuevo-cliente/nuevo-cliente.component';
 import { AgregarMascotaComponent } from './components/agregar-mascota/agregar-mascota.component';
@@ -32,6 +31,16 @@ import { AgregarConsultaComponent } from './components/consultas/agregar-consult
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { ConsultaVacunasComponent } from './components/consulta/consulta-vacunas.component';
 import { ConsultaHistoriaComponent } from './components/consulta/consulta-historia.component';
+import { HistoriaMascotaComponent } from './components/mascota/historia-mascota.component';
+import { HistoriaConsultaComponent } from './components/consulta/historia-consulta.component';
+import { HistorialComponent } from './components/historial/historial.component';
+import { AdministrarComponent } from './components/administrar/administrar.component';
+import { MascotasAdministrarComponent } from './components/administrar/mascotas-administrar.component';
+import { ConsultasAdministrarComponent } from './components/administrar/consultas-administrar.component';
+import { DetallesAdministrarComponent } from './components/administrar/detalles-administrar.component';
+import { ClientesAdministrarComponent } from './components/administrar/clientes-administrar.component';
+import { UsuariosAdministrarComponent } from './components/administrar/usuarios-administrar.component';
+import { MedicosAdministrarComponent } from './components/administrar/medicos-administrar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +50,6 @@ import { ConsultaHistoriaComponent } from './components/consulta/consulta-histor
     ClientesComponent,
     MascotasComponent,
     MascotaComponent,
-    HistoriaComponent,
     ConsultasComponent,
     NuevoClienteComponent,
     AgregarMascotaComponent,
@@ -53,7 +61,17 @@ import { ConsultaHistoriaComponent } from './components/consulta/consulta-histor
     AgregarConsultaComponent,
     ConsultaComponent,
     ConsultaVacunasComponent,
-    ConsultaHistoriaComponent
+    ConsultaHistoriaComponent,
+    HistoriaMascotaComponent,
+    HistoriaConsultaComponent,
+    HistorialComponent,
+    AdministrarComponent,
+    MascotasAdministrarComponent,
+    ConsultasAdministrarComponent,
+    DetallesAdministrarComponent,
+    ClientesAdministrarComponent,
+    UsuariosAdministrarComponent,
+    MedicosAdministrarComponent
   ],
   imports: [
     BrowserModule,

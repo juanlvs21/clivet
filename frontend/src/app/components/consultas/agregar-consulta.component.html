@@ -10,7 +10,7 @@
       <div class="col-md-12">
           <div class="box box-primary  mb-3">
               <div class="box-header with-border">
-                  <i class="fa fa-table"></i>Consultas Totales
+                  <i class="fa fa-plus"></i>Agregar Consulta
                   <div style="float: right;">
                     <button class="btn btn-danger btn-sm " [routerLink]="[ '/consultas'] " title="Ver Consultas ">Regresar</button>
                   </div>
@@ -31,7 +31,11 @@
                         <div class="col">
                             <div class="form-group form-row">
                                 <label for="hora">Hora</label>
-                                <input type="time" id="hora" name="hora" class="form-control" [(ngModel)]="consulta.hora" required>
+                                <input type="time" id="hora" name="hora" class="form-control" (change)="verificarHora()" [(ngModel)]="consulta.hora" required>
+
+                                <small *ngIf="verificandohora"><i class="fa fa-refresh fa-spin"></i>&nbsp;Verificando hora...</small>
+                                <small *ngIf="fueradehorario" style="color:red"><i class="fa fa-times-circle"></i>&nbsp;El horario de antención es de <b>9:00</b> a <b>17:00</b>...</small>
+                                <small *ngIf="horapasada" style="color:red"><i class="fa fa-times-circle"></i>&nbsp;Su consulta es para hoy, <b>ingrese una hora mayor a la actual</b>...</small>                                
                             </div>
                         </div>
                     </div>
@@ -47,9 +51,12 @@
                         <div class="col">
                             <div class="form-group form-row">
                                 <label for="mascota">Mascota</label>
-                                <select class="form-control" id="mascota" name="mascota" [(ngModel)]="consulta.mascota" required>
+                                <select class="form-control" id="mascota" name="mascota" [(ngModel)]="consulta.mascota" (change)="unaConsultaPorDia()" required >
                                     <option [value]="mascota.id" *ngFor="let mascota of mascotas">{{ mascota.nombre }}</option>
                                 </select>
+                                
+                                <small *ngIf="verificandoConsultaPorDia"><i class="fa fa-refresh fa-spin"></i>&nbsp;Verificando Consulta...</small>
+                                <small *ngIf="unaconsultapordia" style="color:red"><i class="fa fa-times-circle"></i>&nbsp;Por politicas de la clinica <b>solo una consulta por día</b>...</small>
                             </div>
                         </div>
                         <div class="col">
@@ -62,7 +69,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="submit" (click)="addConsulta(consultaForm)" data-dismiss="modal" [disabled]="(!consultaForm.valid)&&(guardando)&&(limiteConsultas)">Agregar Detalle&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
+                        <button class="btn btn-success" type="submit" (click)="addConsulta(consultaForm)" data-dismiss="modal" [disabled]="(!consultaForm.valid)||(guardando)||(limiteConsultas)||(fueradehorario)||(horapasada)">Agregar Detalle&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
                     </div>
                   </form>
                 </div>

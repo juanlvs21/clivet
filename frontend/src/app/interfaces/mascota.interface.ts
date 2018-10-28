@@ -2,6 +2,7 @@ export interface Mascota{
     id?:string;
     nombre:string;
     tipo:string;
+    sexo:string;
     raza:string;
     edad:number;
     tamano:number;

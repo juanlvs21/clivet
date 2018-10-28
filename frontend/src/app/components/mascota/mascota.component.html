@@ -44,14 +44,15 @@
                 <address>
                     <b>Tipo: </b>{{ mascota.tipo }}<br>
                     <b>Raza: </b>{{ mascota.raza }}<br>
+                    <b>Sexo: </b>{{ mascota.sexo }}<br>
                     <b>Edad: </b>{{ mascota.edad }}<br>
                     <b>Tamaño: </b>{{ mascota.tamano }}<br>
-                    <b>Peso: </b>{{ mascota.peso }}
                 </address>
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
                 <address>
+                    <b>Peso: </b>{{ mascota.peso }}
                     <b>Descripción: </b>{{ mascota.descripcion }}<br>
                     <b>Antecedentes: </b>{{ mascota.antecedentes }}
                 </address>
@@ -79,7 +80,7 @@
                     <div class="icon">
                         <i class="fa fa-plus"></i>
                     </div>
-                    <a class="small-box-footer" [routerLink]="['/mascota', id ,'vacunas']" >
+                    <a class="small-box-footer" [routerLink]="['/mascota', id ,'vacunas']" *ngIf="clivet.tipo_usuario != 3">
                         Ver Vacunas <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -94,7 +95,7 @@
                     <div class="icon">
                         <i class="fa fa-heart"></i>
                     </div>
-                    <a class="small-box-footer" [routerLink]="['/mascota', id ,'consultas']" >
+                    <a class="small-box-footer" [routerLink]="['/mascota', id ,'consultas']" *ngIf="clivet.tipo_usuario != 3">
                         Ver Consultas <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

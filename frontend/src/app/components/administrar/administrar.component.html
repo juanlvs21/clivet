@@ -1,0 +1,72 @@
+<div class="animated fadeIn">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/administrar']"><i class="fa fa-home"></i><b>Administrar</b></a></li>
+        </ol>
+    </nav>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Mascotas</h5>
+                    <button class="btn btn-danger" [routerLink]="['/administrar/mascotas']">Ver eliminadas</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Consultas</h5>
+                    <button class="btn btn-danger" [routerLink]="['/administrar/consultas']">Ver eliminadas</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Detalles de Historia</h5>
+                    <button class="btn btn-danger" [routerLink]="['/administrar/detalles']">Ver eliminados</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row mt-5 ">
+        <div class="col-md-4 offset-md-2">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Clientes</h5>
+                    <button class="btn btn-danger" [routerLink]="['/administrar/clientes']">Ver eliminados</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Medicos</h5>
+                    <button class="btn btn-primary" [routerLink]="['/administrar/medicos']">Ver todos</button>
+                </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h5 class="card-title">Usuarios</h5>
+                    <button class="btn btn-primary" [routerLink]="['/administrar/usuarios']">Ver todos</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -15,9 +15,12 @@ export class NavbarComponent implements OnInit {
   }
 
   salir(){
-    this.clivet.usuario = [];
-    this.clivet.id_user = "";
-    localStorage.clear();
-    this.router.navigate(['/sesion']);
+    if (confirm('¿Desea cerrar sesión?')) {
+      this.clivet.id_user = "";
+      localStorage.clear();
+      this.router.navigate(['/sesion']);
+    }else{
+      return;
+    }
   }
 }

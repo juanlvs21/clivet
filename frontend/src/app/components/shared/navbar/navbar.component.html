@@ -44,8 +44,10 @@
                     <img src="assets/img/perfil.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="#"><i class="fa fa-star text-success"></i> Medico</a>
+                    <p>{{clivet.usuario.nombre}}</p>
+                    <a href="#" *ngIf="clivet.tipo_usuario == 1"><i class="fa fa-star text-success"></i> Administrador</a>
+                    <a href="#" *ngIf="clivet.tipo_usuario == 2"><i class="fa fa-star text-success"></i> Médico</a>
+                    <a href="#" *ngIf="clivet.tipo_usuario == 3"><i class="fa fa-star text-success"></i> Secretario</a>
                 </div>
             </div>
             <!-- search form -->
@@ -67,17 +69,16 @@
             <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
                 <a [routerLink]="['inicio']">
                     <i class="fa fa-home"></i> <span>Inicio</span>
-                    <!-- <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                    </span> -->
+                </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="(clivet.id_user != '')&&(clivet.tipo_usuario == 1)">
+                <a [routerLink]="['administrar']">
+                    <i class="fa fa-dashboard"></i> <span>Administrar</span>
                 </a>
             </li>
             <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
                 <a [routerLink]="['clientes']">
                     <i class="fa fa-users"></i> <span>Clientes</span>
-                    <!-- <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                    </span> -->
                 </a>
             </li>
             <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
@@ -88,15 +89,6 @@
                     </span> -->
                 </a>
             </li>
-            <!-- <li class="header" *ngIf="clivet.id_user != ''">SESIÓN</li>
-            <li *ngIf="clivet.id_user != ''">
-                <a (click)="salir()">
-                    <i class="fa fa-sign-out"></i> <span>Salir</span>
-                    <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                    </span>
-                </a>
-            </li> -->
             <li routerLinkActive="active" *ngIf="clivet.id_user == ''">
                 <a (click)="salir()" [routerLink]="['/sesion']">
                     <i class="fa fa-sign-in"></i> <span>Iniciar Sesión</span>

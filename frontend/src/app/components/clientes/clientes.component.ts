@@ -15,6 +15,8 @@ export class ClientesComponent implements OnInit {
 
   cargando:boolean = false;
 
+  id_mascota:number;
+
   constructor( private clivet:ClivetService){}
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class ClientesComponent implements OnInit {
 
   getMascotas(){
     this.clivet.getMascotas()
-    .subscribe( (data:any) => {
+    .subscribe( (data:Mascota[]) => {
       this.cargando = false;
       this.mascotas = data;
     });
@@ -44,9 +46,18 @@ export class ClientesComponent implements OnInit {
     if (confirm("¿Desea eliminar este cliente?")) {
       this.clivet.deleteCliente(id) 
       .subscribe(response => {
-        console.log("Cliente Eliminado");
-        this.getClientes();
-        this.getMascotas();
+        this.clivet.getMascotasCliente(id)
+          .subscribe( (data:Mascota) => {
+            this.clivet.deleteMascotaCliente(id)
+              .subscribe( () => {
+                // this.clivet.deleteDetallesMascota(this.id_mascota)
+                  // .subscribe( () => {
+                    console.log("Cliente Eliminado");
+                    this.getClientes();
+                    this.getMascotas();
+                  // })
+              })
+          })
       });
     }
   }

@@ -21,7 +21,10 @@ CREATE TABLE medico(
     apellido VARCHAR(40) NOT NULL,
     correo VARCHAR(50) UNIQUE,
     telefono VARCHAR(11),
-    direccion VARCHAR(100)
+    direccion VARCHAR(100),
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE mascota_historia(
@@ -29,6 +32,7 @@ CREATE TABLE mascota_historia(
     nombre VARCHAR(40) NOT NULL,
     tipo VARCHAR(5) NOT NULL,
     raza VARCHAR(50),
+    sexo VARCHAR(1),
     edad INT,
     tamano FLOAT,
     peso FLOAT,
@@ -45,7 +49,7 @@ CREATE TABLE consulta(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    estado VARCHAR(20),
+    finalizada INT NOT NULL,
     descripcion VARCHAR(50),
     id_mascota INT NOT NULL,
     id_medico INT NOT NULL,
@@ -66,33 +70,6 @@ CREATE TABLE detalle_historia(
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE examen(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    tipo VARCHAR(40),
-    descripcion VARCHAR(200),
-    id_mascota INT NOT NULL,
-    id_detalle INT NOT NULL,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_mascota) REFERENCES mascota_historia(id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_detalle) REFERENCES detalle_historia(id)
-    ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE tratamiento(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    medicamento VARCHAR(100),
-    aplicacion VARCHAR(300),
-    observacion VARCHAR(300),
-    id_mascota INT NOT NULL,
-    id_detalle INT NOT NULL,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_mascota) REFERENCES mascota_historia(id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_detalle) REFERENCES detalle_historia(id)
-    ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE vacunas(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
@@ -108,5 +85,5 @@ CREATE TABLE usuarios(
     contra VARCHAR(100),
     nombre VARCHAR(40) NOT NULL,
     apellido VARCHAR(40) NOT NULL,
-    tipo VARCHAR(20) NOT NULL
+    tipo INT NOT NULL DEFAULT 0
 );

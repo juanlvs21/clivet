@@ -26,41 +26,57 @@
                             <div class="col">
                                 <div class="form-group form-row">
                                     <label for="nombre">Nombre: </label>
-                                    <input type="text" class="form-control" name="nombre" [(ngModel)]="mascota.nombre">
+                                    <input type="text" class="form-control" name="nombre" [(ngModel)]="mascota.nombre" required>
                                 </div>
                                 <div class="form-group form-row">
-                                    <label for="tipo">Tipo:</label>
-                                    <select class="form-control" id="tipo" [(ngModel)]="mascota.tipo" name="tipo">
-                                                            <option value="">Elija una opción...</option>
-                                                            <option value="Perro">Perro</option>
-                                                            <option value="Gato">Gato</option>
-                                                            </select>
+                                    <div class="col-md-6">
+                                        <label for="tipo">Tipo:</label>
+                                        <select class="form-control" id="tipo" [(ngModel)]="mascota.tipo" name="tipo"  required>
+                                            <option value="">Elija una opción...</option>
+                                            <option value="Perro">Perro</option>
+                                            <option value="Gato">Gato</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="sexo">Sexo:</label>
+                                        <select class="form-control" id="sexo" [(ngModel)]="mascota.sexo" name="sexo" required> 
+                                            <option value="">Elija una opción...</option>
+                                            <option value="M">M</option>
+                                            <option value="F">F</option>
+                                        </select> 
+                                    </div>
+                                </div>
+                                <div class="form-group form-row">
                                 </div>
                                 <div class="form-group form-row">
                                     <label for="raza">Raza: </label>
                                     <input type="text" class="form-control" name="raza" [(ngModel)]="mascota.raza">
                                 </div>
                                 <div class="form-group form-row">
-                                    <label for="edad">Edad: </label>
-                                    <input type="text" class="form-control" name="edad" [(ngModel)]="mascota.edad">
+                                    <label for="edad">Edad: <small>(Meses)</small></label>
+                                    <input type="number" class="form-control" name="edad" [(ngModel)]="mascota.edad">
                                 </div>
                                 <div class="form-group form-row">
-                                    <label for="tamano">Tamaño: </label>
-                                    <input type="text" class="form-control" name="tamano" [(ngModel)]="mascota.tamano">
+                                    <div class="col-md-6">
+                                        <label for="tamano">Tamaño: <small>(Metros)</small></label>
+                                        <input type="number" class="form-control" name="tamano" [(ngModel)]="mascota.tamano">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="peso">Peso: <small>(Kilogramos)</small></label>
+                                        <input type="number" class="form-control" name="peso" [(ngModel)]="mascota.peso">
+                                    </div>
                                 </div>
                                 <div class="form-group form-row">
-                                    <label for="peso">Peso: </label>
-                                    <input type="text" class="form-control" name="peso" [(ngModel)]="mascota.peso">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group form-row">
                                     <label for="descripcion">Descripcion: </label>
-                                    <textarea name="descripcion" class="form-control" cols="30" rows="8" [(ngModel)]="mascota.descripcion"></textarea>
+                                    <textarea name="descripcion" class="form-control" cols="30" rows="7" [(ngModel)]="mascota.descripcion"></textarea>
                                 </div>
                                 <div class="form-group form-row">
                                     <label for="antecedentes">Antecedentes: </label>
-                                    <textarea name="antecedentes" class="form-control" cols="30" rows="9" [(ngModel)]="mascota.antecedentes"></textarea>
+                                    <textarea name="antecedentes" class="form-control" cols="30" rows="7" [(ngModel)]="mascota.antecedentes"></textarea>
                                 </div>
                             </div>
                         </div>

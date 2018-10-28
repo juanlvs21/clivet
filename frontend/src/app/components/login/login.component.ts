@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("id_user", data.id );
         this.clivet.usuario = data;
         this.clivet.id_user = data.id;
+        this.clivet.tipo_usuario = data.tipo;
         this.login = false;
         if (this.clivet.id_user != "") {
           this.router.navigate(['/inicio']);

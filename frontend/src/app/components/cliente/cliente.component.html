@@ -84,28 +84,31 @@
                                         <th>Nro</th>
                                         <th>Nombre</th>
                                         <th>Tipo</th>
+                                        <th>Sexo</th>
                                         <th>Raza</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Nro</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Raza</th>
-                                        <th>Acciones</th>
+                                        <th class="text-center">Nro</th>
+                                        <th class="text-center">Nombre</th>
+                                        <th class="text-center">Tipo</th>
+                                        <th class="text-center">Sexo</th>
+                                        <th class="text-center">Raza</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <tr *ngFor="let mascota of mascotas; let i=index ">
-                                        <td> {{ i + 1 }} </td>
-                                        <td> {{ mascota.nombre }} </td>
-                                        <td> {{ mascota.tipo }} </td>
-                                        <td> {{ mascota.raza }} </td>
-                                        <td>
+                                        <td class="text-center"> {{ i + 1 }} </td>
+                                        <td class="text-center"> {{ mascota.nombre }} </td>
+                                        <td class="text-center"> {{ mascota.tipo }} </td>
+                                        <td class="text-center"> {{ mascota.sexo }} </td>
+                                        <td class="text-center"> {{ mascota.raza }} </td>
+                                        <td class="text-center">
                                             <div class="btn-group btn-group-sm " role="group " aria-label="Basic example ">
-                                                <button type="button " class="btn btn-primary " style="margin-left:40% " title="Agregar Mascota " [routerLink]="[ '/mascota', mascota.id] "><i class="fa fa-eye " style="margin:4px "></i></button>
+                                                <button type="button " class="btn btn-primary "title="Agregar Mascota " [routerLink]="[ '/mascota', mascota.id] "><i class="fa fa-eye " style="margin:4px "></i></button>
                                                 <button type="button " class="btn btn-danger " title="Eliminar Usuario " (click)="eliminarMascota(mascota.id) "><i class="fa fa-trash " style="margin:5px "></i></button>
                                             </div>
                                         </td>

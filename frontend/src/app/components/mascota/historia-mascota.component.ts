@@ -6,22 +6,18 @@ import { Mascota } from '../../interfaces/mascota.interface';
 import { Detalle } from '../../interfaces/detalle.interface';
 
 @Component({
-  selector: 'app-consultas-mascota',
-  templateUrl: './consultas-mascota.component.html',
+  selector: 'app-historia-mascota',
+  templateUrl: './historia-mascota.component.html',
   styles: []
 })
-export class ConsultasMascotaComponent implements OnInit {
+export class HistoriaMascotaComponent implements OnInit {
 
   id: number;
   id_cliente: number;
+  id_detalle: number;
   cliente: Cliente;
   mascota:Mascota;
-  detalles:Detalle[];
-
-  datosdetalle = {
-    id_historia: "",
-    descripcion: ""
-  }
+  detalle:Detalle;
 
   cargando:boolean = true;
   guardadodetalle:boolean = false;
@@ -41,7 +37,7 @@ export class ConsultasMascotaComponent implements OnInit {
   getIp(){
     this.activatedRouted.params.subscribe(params => {
       this.id = params['id'];
-      this.datosdetalle.id_historia = params['id'];
+      this.id_detalle = params['id_detalle'];
     })
   }
 
@@ -55,29 +51,14 @@ export class ConsultasMascotaComponent implements OnInit {
       });
   }
 
-  eliminarMascota(){
-    this.eliminando = true;
-    if (confirm(`¿Desea eliminar a ${this.mascota.nombre}?`)) {
-      this.clivet.deleteMascota(this.id) 
-      .subscribe(response => {
-        this.eliminando = false;
-        console.log("Mascota Eliminada");
-        this.router.navigate(['/cliente', this.id_cliente ]);
-      });
-    }else{
-      this.eliminando = false;
-    }
-  }
-
   getDetalle(){
-    this.clivet.getDetalle(this.id)
-      .subscribe( (data:Detalle[]) => {
+    this.clivet.getUnicoDetalle(this.id_detalle)
+      .subscribe( (data:Detalle) => {
         console.log(data);
-        this.detalles = data;
+        this.detalle = data[0];
         this.cargando = false;
-        this.totalconsulta = data.length;
       });
-  }
+  }  
   
   eliminarDetalle(id:number){
     this.eliminandodetalle = id;
@@ -86,6 +67,7 @@ export class ConsultasMascotaComponent implements OnInit {
       .subscribe(response => {
         this.eliminandodetalle = -1;
         console.log("Detalle Eliminado");
+        this.router.navigate(['/mascota',this.id,'consultas'])
         this.getDetalle();
       });
     }else{

@@ -19,7 +19,7 @@ export class ConsultaHistoriaComponent implements OnInit {
   id_cliente: number;
   cliente: Cliente;
   mascota:Mascota;
-  detalles:Detalle;
+  detalle:Detalle;
   consulta:Consulta;
 
   datosdetalle = {
@@ -30,6 +30,8 @@ export class ConsultaHistoriaComponent implements OnInit {
   cargando:boolean = true;
   guardadodetalle:boolean = false;
   eliminando:boolean = false;
+  editando:boolean = false;
+  guardado:boolean = false;
 
   eliminandodetalle:number = -1;
 
@@ -71,11 +73,25 @@ export class ConsultaHistoriaComponent implements OnInit {
 
   // ----- DETALLE -----
   getDetalle(){
+    this.cargando = true;   
+    let f = new Date()
+    let fecha = f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate()
+
     this.clivet.getDetalle(this.id_mascota)
-      .subscribe( (data:Detalle) => {
-        console.log(data);
-        this.detalles = data;
-        this.cargando = false;
+      .subscribe( (data:Detalle[]) => {
+        for (let i = 0; i < data.length; i++) {
+          let fd = data[i].fecha.split("T") 
+          if (fd[0] == fecha) {
+            this.detalle = data[i];
+            this.datosdetalle.descripcion = data[i].descripcion
+            this.guardado = true;
+            console.log(this.detalle);
+            this.editando = true
+          }else{
+            this.editando = false
+          }
+        }
+        this.cargando = false;   
       });
   }
 
@@ -87,11 +103,20 @@ export class ConsultaHistoriaComponent implements OnInit {
         this.datosdetalle.descripcion = "";
         this.getDetalle();
         this.guardadodetalle = false;
+        this.guardado = true;
       },
       error => {
         console.error('Error al agregar nuevo Detalle: '+error);
         this.guardadodetalle = false;
       });
+  }
+
+  editarDetalle(detalle:NgForm){
+    this.clivet.deleteDetalle(this.detalle.id) 
+      .subscribe(response => {
+        this.eliminandodetalle = -1;
+        this.agregardetalle(detalle)
+      });    
   }
 
   eliminarDetalle(id:number){

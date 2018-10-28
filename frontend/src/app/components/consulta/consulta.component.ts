@@ -20,10 +20,17 @@ export class ConsultaComponent implements OnInit {
   totalvacunas:number = 0;
   totaldetalles:number = 0;
 
-  constructor(private clivet: ClivetService, private activatedRouted: ActivatedRoute) { }
+  finalizando:boolean = false;
+  fechaactual:boolean = false;
+
+  fecha:string = ""
+  hora:string = ""
+
+  constructor(public clivet: ClivetService, private activatedRouted: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.getIp();
+    this.getDate()
     this.getConsulta();
   }
 
@@ -33,18 +40,41 @@ export class ConsultaComponent implements OnInit {
     })
   }
 
+  // ----- FECHA ------
+  getDate(){
+    let f = new Date()
+    this.fecha = f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate()
+    this.hora = f.getHours()+":"+f.getMinutes()+":"+f.getSeconds(); 
+  }
+
   // ----- CONSULTA -----
   getConsulta(){
+    this.fechaactual = false
     // this.cargando = true;
     this.clivet.getConsulta(this.id)
       .subscribe( (data:Consulta) => {
         // this.cargando = false;
         this.consulta = data;
+        let fd = this.consulta.fecha.split("T") 
+        if (fd[0] == this.fecha) {
+          this.fechaactual = true
+        }
         this.getMascota(this.consulta.id_mascota);
         this.getVacunas();  
         this.getDetalle();
       });
   }  
+
+  finalizarConsulta(){
+    if (confirm("¿Desea finalizar su consulta?")) {
+      this.finalizando = true
+      this.clivet.finalizarConsulta(this.id)
+        .subscribe( () => {
+          this.finalizando = true
+            this.router.navigate(['/consultas']);
+        })
+    }
+  }
 
   // ----- MASCOTA -----
   getMascota(id:number){

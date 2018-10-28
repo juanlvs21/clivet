@@ -8,14 +8,17 @@ import { Mascota } from '../interfaces/mascota.interface';
 import { Detalle } from '../interfaces/detalle.interface';
 import { Vacuna } from '../interfaces/vacuna.interface';
 import { Consulta } from '../interfaces/consulta.interface';
+import { Usuario } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClivetService {
 
-  usuario = {};
+  usuario:Usuario;
+
   id_user:string = ""
+  tipo_usuario:number = 0;
 
   url = 'http://localhost:3000/';
 
@@ -49,10 +52,45 @@ getUsuario<Data>(usuario: string): Observable<any> {
       }));
 }
 
+getUsuarios(){
+  return this.http.get(`${this.url}usuarios`);
+} 
+
+deleteUsuario(id:number){
+  return this.http.delete(`${this.url}usuarios/${id}`)
+    .pipe(
+      map( res => {
+        return res;
+      })
+    );
+}
+
+nuevoUsuario (usuario: Usuario): Observable<Usuario> {
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.post<Usuario>(this.url+'usuario', usuario, httpOptions).pipe(
+    tap((usuario: Cliente) => console.log(`Usuario registrado w/ id=${usuario.ci}`))
+  );
+}
+
 // ---------- CLIENTE -----------
   getClientes(){
     return this.http.get(`${this.url}clientes`);
   } 
+
+  getClientesAdmin(){
+    return this.http.get(`${this.url}clientes/admin`);
+  }   
+  
+  deleteClientesAdmin(){
+    return this.http.delete(`${this.url}clientes/admin`)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      );
+  }
   
   getCliente<Data>(id: number): Observable<any> {
     const url = `${this.url}clientes/${id}`;
@@ -89,8 +127,21 @@ getUsuario<Data>(usuario: string): Observable<any> {
 
   // ---------- MASCOTA -----------
   getMascotas(){
-      return this.http.get(`${this.url}mascotas`);
+    return this.http.get(`${this.url}mascotas`);
   }   
+
+  getMascotasAdmin(){
+      return this.http.get(`${this.url}mascotas/admin`);
+  }   
+  
+  deleteMascotasAdmin(){
+    return this.http.delete(`${this.url}mascotas/admin`)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      );
+  }
   
   getMascotasCliente( id:number ){
       return this.http.get(`${this.url}mascotas/cliente/${id}`);
@@ -129,9 +180,40 @@ getUsuario<Data>(usuario: string): Observable<any> {
       );
   }
 
+  deleteMascotaCliente(id:number){
+    let body = JSON.stringify( id );
+
+    let url = `${this.url}mascota/eliminar/cliente/${id}`;
+
+    return this.http.put( url , body)
+      .pipe(
+        map( res => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
+
   // ---------- DETALLES -----------
   getDetalle(id:number){
     return this.http.get(`${this.url}detalles/${id}`);
+  } 
+
+  getDetallesAdmin(){
+    return this.http.get(`${this.url}detalles/admin`);
+  }   
+  
+  deleteDetallesAdmin(){
+    return this.http.delete(`${this.url}detalles/admin`)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      );
+  }
+
+  getUnicoDetalle(id:number){
+    return this.http.get(`${this.url}detalle/${id}`);
   } 
 
   nuevoDetalle (detalle: Detalle): Observable<Detalle> {
@@ -146,6 +228,18 @@ getUsuario<Data>(usuario: string): Observable<any> {
   deleteDetalle(id:number){
     let body = JSON.stringify( id );
     let url = `${this.url}detalles/eliminar/${id}`;
+    return this.http.put( url , body)
+      .pipe(
+        map( res => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
+
+  deleteDetallesMascota(id:number){
+    let body = JSON.stringify( id );
+    let url = `${this.url}detalles/eliminar/cliente/${id}`;
     return this.http.put( url , body)
       .pipe(
         map( res => {
@@ -179,6 +273,23 @@ getUsuario<Data>(usuario: string): Observable<any> {
   }
 
   // ---------- CONSULTAS -----------
+  getConsultasHistorial(){
+    return this.http.get(`${this.url}consultas/historial`);
+  }   
+
+  getConsultasAdmin(){
+      return this.http.get(`${this.url}consultas/admin`);
+  }   
+  
+  deleteConsultasAdmin(){
+    return this.http.delete(`${this.url}consultas/admin`)
+      .pipe(
+        map( res => {
+          return res;
+        })
+      );
+  }
+
   getConsultas(){
     return this.http.get(`${this.url}consultas`);
   }   
@@ -224,6 +335,20 @@ getUsuario<Data>(usuario: string): Observable<any> {
     let body = JSON.stringify( id );
 
     let url = `${this.url}consulta/eliminar/${id}`;
+
+    return this.http.put( url , body)
+      .pipe(
+        map( res => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
+
+  finalizarConsulta(id:number){
+    let body = JSON.stringify( id );
+
+    let url = `${this.url}consulta/finalizar/${id}`;
 
     return this.http.put( url , body)
       .pipe(

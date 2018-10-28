@@ -33,66 +33,24 @@
                 <h2 class="page-header">
                     &nbsp; &nbsp;
                     <i class="fa fa-paw"></i> {{ mascota.nombre }}
-                    <!-- <small class="pull-right"> {{mascota.fecha_creacion}}</small> -->
+                    <small class="pull-right"> &nbsp;{{consulta.fecha | date:"dd/MM/yyyy"}}</small>
                 </h2>
             </div>
             <!-- /.col -->
         </div>
         <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="card">
-              <div class="card-body">
-                <form #forma="ngForm">
-                  <div class="form-group form-row">
-                      <label for="descripcion">Descripción: </label>
-                      <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="10" [(ngModel)]="datosdetalle.descripcion" required></textarea>
-                  </div>
-                  <input type="hidden" name="id_historia" [(ngModel)]="datosdetalle.id_historia" required>
-                  <div class="modal-footer">
-                      <button class="btn btn-success" type="submit" (click)="agregardetalle(forma)" [disabled]="!forma.valid">Agregar Detalle&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="col-xs-12 table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th>Nro.</th>
-                          <th>Fecha</th>
-                          <th>Descripción</th>
-                          <th>Acciones</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let detalle of detalles; let n = index">
-                          <td>{{ n + 1 }}</td>
-                          <td>{{ detalle.fecha | date:"dd/MM/yy" }}</td>
-                          <td>{{ detalle.descripcion | slice:0:90 }} ...</td>
-                          <td>
-                              <button class="btn btn-primary btn-sm tooltip-test" title="Ver Detalle"><i class="fa fa-eye"></i></button>&nbsp;
-                              <!-- <button class="btn btn-success btn-small tooltip-test" title="Editar Detalle" ><i class="fa fa-pencil"></i></button>&nbsp; -->
-                              <button class="btn btn-danger btn-sm tooltip-test" title="Eliminar Detalle" (click)="eliminarDetalle(detalle.id)" [disabled]="eliminandodetalle == detalle.id" >
-                                  <i class="fa fa-trash" style="margin-left:1px; margin-right:1px"></i>
-                                  <i class="fa fa-refresh fa-spin ml-1" *ngIf="eliminandodetalle == detalle.id"></i>
-                              </button>
-                          </td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-          </div>
-        </div>
-        <div class="row mt-5">
             <div class="col-md-12">
-                <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary">
-                        <i class="fa fa-print"></i> Imprimir
-                    </button>
-                </div>
+                <form #forma="ngForm">
+                    <div class="form-group form-row">
+                        <label for="descripcion">Descripción: </label>
+                        <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="10" [(ngModel)]="datosdetalle.descripcion" required></textarea>
+                    </div>
+                    <input type="hidden" name="id_historia" [(ngModel)]="datosdetalle.id_historia" required>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit" (click)="agregardetalle(forma)" [disabled]="(!forma.valid)||(guardado)" *ngIf="!editando">Agregar Detalle&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
+                        <button class="btn btn-success" type="submit" (click)="editarDetalle(forma)" [disabled]="!forma.valid" *ngIf="editando">Guardar edición del Detalle&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>

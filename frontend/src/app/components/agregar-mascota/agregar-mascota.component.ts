@@ -19,6 +19,7 @@ export class AgregarMascotaComponent{
   mascota:Mascota = {
     nombre: "",
     tipo: "",
+    sexo: "",
     raza: "",
     edad: 0,
     tamano: 0,

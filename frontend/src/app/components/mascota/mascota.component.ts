@@ -41,7 +41,7 @@ export class MascotaComponent implements OnInit {
   totalvacunas:number = 0;
   totaldetalles: number = 0;
 
-  constructor(private clivet: ClivetService, private activatedRouted: ActivatedRoute, private router:Router) { }
+  constructor(public clivet: ClivetService, private activatedRouted: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.getIp();

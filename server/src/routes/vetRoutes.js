@@ -10,10 +10,78 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/usuarios', (req, res) => {
+        Vet.getUsuarios((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.delete('/usuarios/:id', (req, res) => {
+        Vet.deleteUsuario(req.params.id, (err, data) => {
+            if (data && (data.msg === "Eliminado" || data.msg === "No existe")) {
+                res.json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(500).json({
+                    msg: "Error interno del servidor"
+                })
+            }
+        })
+    });
+
+    app.post('/usuario', (req, res) => {
+        const usuarioData = {
+            ci: req.body.ci,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            usuario: req.body.usuario,
+            contra: req.body.contra,
+            tipo: req.body.tipo
+        };
+
+        Vet.insertUsuario(usuarioData, (err, data) => {
+            if (data) {
+                res.json({
+                    success: true,
+                    msg: 'Usuario insertado',
+                    data: data
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    msg: 'Error interno del servidor'
+                });
+            };
+        });
+    });
+
     // ---------- CLIENTES ----------
     app.get('/clientes', (req, res) => {
         Vet.getClientes((err, data) => {
             res.json(data);
+        })
+    });
+    
+    app.get('/clientes/admin', (req, res) => {
+        Vet.getClientesAdmin((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.delete('/clientes/admin', (req, res) => {
+        Vet.deleteClientesAdmin((err, data) => {
+            if (data && (data.msg === "Eliminado")) {
+                res.json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(500).json({
+                    msg: "Error interno del servidor"
+                })
+            }
         })
     });
 
@@ -83,6 +151,27 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/mascotas/admin', (req, res) => {
+        Vet.getMascotasAdmin((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.delete('/mascotas/admin', (req, res) => {
+        Vet.deleteMascotasAdmin((err, data) => {
+            if (data && (data.msg === "Eliminado")) {
+                res.json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(500).json({
+                    msg: "Error interno del servidor"
+                })
+            }
+        })
+    });
+
     app.get('/mascotas/:id', (req, res) => {
         Vet.getMascota(req.params.id, (err, data) => {
             res.json(data);
@@ -99,6 +188,7 @@ module.exports = function(app) {
         const mascotaData = {
             nombre: req.body.nombre,
             tipo: req.body.tipo,
+            sexo: req.body.sexo,
             raza: req.body.raza,
             edad: req.body.edad,
             tamano: req.body.tamano,
@@ -137,9 +227,49 @@ module.exports = function(app) {
         });
     });
 
+    app.put('/mascota/eliminar/cliente/:id', (req, res) => {
+        Vet.deleteMascotaCliente(req.params.id, (err, data) => {
+            if (data) {
+                res.json(data)
+            } else {
+                res.json({
+                    success: false,
+                    msg: "Error al Eliminar"
+                });
+            }
+        });
+    });
+
     // ---------- DETALLES ----------
     app.get('/detalles/:id', (req, res) => {
         Vet.getDetalle(req.params.id, (err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.get('/detalles/admin', (req, res) => {
+        Vet.getDetallesAdmin((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.delete('/detalles/admin', (req, res) => {
+        Vet.deleteDetallesAdmin((err, data) => {
+            if (data && (data.msg === "Eliminado")) {
+                res.json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(500).json({
+                    msg: "Error interno del servidor"
+                })
+            }
+        })
+    });
+
+    app.get('/detalle/:id', (req, res) => {
+        Vet.getUnicoDetalle(req.params.id, (err, data) => {
             res.json(data);
         })
     });
@@ -168,6 +298,19 @@ module.exports = function(app) {
 
     app.put('/detalles/eliminar/:id', (req, res) => {
         Vet.deleteDetalle(req.params.id, (err, data) => {
+            if (data) {
+                res.json(data)
+            } else {
+                res.json({
+                    success: false,
+                    msg: "Error al Eliminar"
+                });
+            }
+        });
+    });
+
+    app.put('/detalles/eliminar/cliente/:id', (req, res) => {
+        Vet.deleteDetallesCliente(req.params.id, (err, data) => {
             if (data) {
                 res.json(data)
             } else {
@@ -225,6 +368,33 @@ module.exports = function(app) {
     });
 
     // ---------- CONSULTAS ----------
+    app.get('/consultas/historial', (req, res) => {
+        Vet.getConsultasHistorial((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.get('/consultas/admin', (req, res) => {
+        Vet.getConsultasAdmin((err, data) => {
+            res.json(data);
+        })
+    });
+
+    app.delete('/consultas/admin', (req, res) => {
+        Vet.deleteConsultasAdmin((err, data) => {
+            if (data && (data.msg === "Eliminado")) {
+                res.json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(500).json({
+                    msg: "Error interno del servidor"
+                })
+            }
+        })
+    });
+
     app.get('/consultas', (req, res) => {
         Vet.getConsultas((err, data) => {
             res.json(data);
@@ -247,7 +417,7 @@ module.exports = function(app) {
         const detalleConsulta = {
             fecha: req.body.fecha,
             hora: req.body.hora,
-            estado: "Activa",
+            finalizada: 0,
             descripcion: req.body.descripcion,
             id_mascota: req.body.mascota,
             id_medico: req.body.medico
@@ -277,6 +447,19 @@ module.exports = function(app) {
                 res.json({
                     success: false,
                     msg: "Error al Desactivar"
+                });
+            }
+        });
+    });
+
+    app.put('/consulta/finalizar/:id', (req, res) => {
+        Vet.finalizarConsulta(req.params.id, (err, data) => {
+            if (data) {
+                res.json(data)
+            } else {
+                res.json({
+                    success: false,
+                    msg: "Error al Finalizar"
                 });
             }
         });

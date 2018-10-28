@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClivetService } from '../../services/clivet.service';
-import { NgForm } from '@angular/forms';
 import { Consulta } from '../../interfaces/consulta.interface';
 import { Mascota } from '../../interfaces/mascota.interface';
-import { Medico } from '../../interfaces/medico.interface';
+import { Usuario } from '../../interfaces/usuario.interface';
 
 @Component({
   selector: 'app-consultas',
@@ -15,55 +14,63 @@ export class ConsultasComponent implements OnInit {
   consultas:Consulta[] = [];
   consultasFecha:Consulta[] = [];
   mascotas:Mascota[] = [];
-  medicos:Medico[] = [];
-
-  consulta = {
-    fecha:"",
-    hora: "",
-    estado: "Activa",
-    descripcion: "",
-    mascota:"",
-    medico:""
-  }
+  medicos:Usuario[] = [];
 
   consultashoy:number;
   consultastotal:number;
 
   cargando:boolean = false;
   guardado:boolean = false;
+
+  f = new Date()
+  fecha:string = ""
   
-  constructor( private clivet:ClivetService ) { }
+  constructor( private clivet:ClivetService ) {}
 
   ngOnInit() {
     this.loadScripts();
-    // this.consultasPasadas();
+    this.getDate();
     this.getConsultas();
     this.getConsultasHoy();
     this.getMascotas();
     this.getMedicos();
   }
 
-  // ----- CONSULTAS -----
-  // consultasPasadas(){
-  //   let fechaformat = new Date();
-  //   let fecha = fechaformat.getFullYear() + '-' + ("0" + (fechaformat.getMonth() + 1)).slice(-2) + '-' + ("0" + fechaformat.getDate()).slice(-2);    
-  //   this.clivet.consultasPasadas(fecha) 
-  //     .subscribe( () => {
-  //       console.log("Consultas pasadas desactivadas");
-  //     });
-  // }
+  // ----- FECHA ------
+  getDate(){
+    let f = new Date()
+    this.fecha = f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate()
+  }
 
+  // ----- CONSULTAS -----
   getConsultas(){
     this.cargando = true;
+    let fecha;
+    this.consultas = [];
+
     this.clivet.getConsultas()
       .subscribe( (data:Consulta[]) => {
         // this.cargando = false;
-        this.consultas = data;
-        this.consultastotal = data.length;
-        this.doughnutChartData = [this.consultashoy, this.consultastotal];
-        this.cargando = false;
+        for (let i = 0; i < data.length; i++) {
+          fecha = data[i].fecha.split("T")
+          if (fecha[0] >= this.fecha) {
+            this.consultas.push(data[i]);
+            this.consultastotal = data.length;
+            this.doughnutChartData = [this.consultashoy, this.consultastotal];
+            this.cargando = false;            
+          }else{
+            this.finalizarConsultaPasada(data[i].id)
+          }
+        }
       });
+      this.cargando = false;            
   }  
+
+  finalizarConsultaPasada(id:number){
+    this.clivet.finalizarConsulta(id)
+      .subscribe( () => {
+      })
+  }
 
   getConsultasHoy(){
     let fechaformat = new Date();
@@ -84,8 +91,6 @@ export class ConsultasComponent implements OnInit {
         console.log("Consulta Eliminada");
         this.getConsultas();
         this.getConsultasHoy();
-        this.getMascotas()
-        this.getMedicos()
       });
     }
   }
@@ -101,15 +106,20 @@ export class ConsultasComponent implements OnInit {
   
   // ----- MEDICOS -----
   getMedicos(){
-    this.clivet.getMedicos()
-      .subscribe( (data:Medico[]) => {
+    this.medicos = []
+    this.clivet.getUsuarios()
+      .subscribe( (data:Usuario[]) => {
         // this.cargando = false;
-        this.medicos = data;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].tipo == 2) {
+            this.medicos.push(data[i]);
+          }
+        }
       });
   }
 
   // ---------- Doughnut ----------
-  public doughnutChartLabels:string[] = ['Hoy', 'Total'];
+  public doughnutChartLabels:string[] = ['Hoy', 'En curso'];
   public doughnutChartData:number[] = [this.consultashoy, this.consultastotal];
   public doughnutChartType:string = 'doughnut';
  

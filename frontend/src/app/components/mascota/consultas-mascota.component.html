@@ -5,7 +5,7 @@
           <li class="breadcrumb-item"><a [routerLink]="['/clientes']"><i class="fa fa-group"></i>&nbsp;Clientes</a></li>
           <li class="breadcrumb-item"><a [routerLink]="['/cliente', id_cliente]"><i class="fa fa-user"></i>&nbsp;{{cliente.nombre}}</a></li>
           <li class="breadcrumb-item"><a [routerLink]="['/mascota', id]"><i class="fa fa-paw"></i>&nbsp;{{mascota.nombre}}</a></li>
-          <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/mascota', id ,'vacunas']"><i class="fa fa-edit"></i>&nbsp;Historia</a></b></li>
+          <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/mascota', id ,'consultas']"><i class="fa fa-edit"></i>&nbsp;Historia</a></b></li>
       </ol>
   </nav>
 
@@ -68,12 +68,13 @@
                         <td>{{ detalle.fecha | date:"dd/MM/yy" }}</td>
                         <td>{{ detalle.descripcion | slice:0:90 }} ...</td>
                         <td>
-                            <button class="btn btn-primary btn-sm tooltip-test" title="Ver Detalle"><i class="fa fa-eye"></i></button>&nbsp;
-                            <!-- <button class="btn btn-success btn-small tooltip-test" title="Editar Detalle" ><i class="fa fa-pencil"></i></button>&nbsp; -->
-                            <button class="btn btn-danger btn-sm tooltip-test" title="Eliminar Detalle" (click)="eliminarDetalle(detalle.id)" [disabled]="eliminandodetalle == detalle.id" >
-                                <i class="fa fa-trash"></i>
-                                <i class="fa fa-refresh fa-spin ml-1" *ngIf="eliminandodetalle == detalle.id"></i>
-                            </button>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary" title="Ver Detalle" [routerLink]="['/mascota', id, 'consultas', 'detalle', detalle.id]"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger" title="Eliminar Detalle" (click)="eliminarDetalle(detalle.id)" [disabled]="eliminandodetalle == detalle.id" >
+                                    <i class="fa fa-trash" style="margin-left:1px; margin-right:1px"></i>
+                                    <i class="fa fa-refresh fa-spin ml-1" *ngIf="eliminandodetalle == detalle.id"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -81,15 +82,14 @@
             </div>
         </div>
       </div>
-      <div class="row mt-5">
+      <!-- <div class="row mt-5">
             <div class="col-md-12">
-                <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-success">
                         <i class="fa fa-print"></i> Imprimir Historia
                     </button>
                 </div>
             </div>
-      </div>
+      </div> -->
   </section>
 </div>

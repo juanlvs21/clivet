@@ -28,6 +28,66 @@ vetModel.getUsuario = (usuario, callback) => {
     }
 }
 
+vetModel.getUsuarios = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM usuario',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.deleteUsuario = (id, callback) => {
+    if (connection) {
+        let sql = `SELECT * FROM usuario WHERE id = ${connection.escape(id)}`;
+
+        connection.query(sql, (err, result) => {
+            if (result) {
+                let sql = `DELETE FROM usuario WHERE id = ${id}`;
+
+                connection.query(sql, (err, result2) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        callback(null, {
+                            msg: "Eliminado"
+                        })
+                    }
+                });
+            } else {
+                callback(err, {
+                    msg: "No existe"
+                })
+            }
+        })
+    }
+};
+
+vetModel.insertUsuario = (usuarioData, callback) => {
+    if (connection) {
+        connection.query(
+            'INSERT INTO usuario SET ?', usuarioData,
+            (err, result) => {
+                if (err) {
+                    console.log("Error al Insertar");
+                    throw err;
+                } else {
+                    callback(null, {
+                        'insertId': result.insertId //InsertId es lo que se usa en la ruta
+                    });
+                    console.log("Usuario Insertado");
+                }
+            }
+        )
+    }
+};
+
 // ---------- CLIENTES ----------
 vetModel.getClientes = (callback) => {
     if (connection) {
@@ -43,6 +103,38 @@ vetModel.getClientes = (callback) => {
         );
     }
 }
+
+vetModel.getClientesAdmin = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM cliente WHERE eliminado=1',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.deleteClientesAdmin = (callback) => {
+    if (connection) {
+        let sql = `DELETE FROM cliente WHERE eliminado=1`;
+
+        connection.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                callback(null, {
+                    msg: "Eliminado"
+                })
+            }
+        });
+    }
+};
 
 vetModel.getCliente = (id, callback) => {
     if (connection) {
@@ -120,6 +212,37 @@ vetModel.getMascotas = (callback) => {
     }
 }
 
+vetModel.getMascotasAdmin = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM mascota_historia WHERE eliminada="1"',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.deleteMascotasAdmin = (callback) => {
+    if (connection) {
+        let sql = `DELETE FROM mascota_historia WHERE eliminada=1`;
+
+        connection.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                callback(null, {
+                    msg: "Eliminado"
+                })
+            }
+        });
+    }
+};
+
 vetModel.getMascota = (id, callback) => {
     if (connection) {
         connection.query(
@@ -195,11 +318,84 @@ vetModel.deleteMascota = (id, callback) => {
     }
 };
 
+vetModel.deleteMascotaCliente = (id, callback) => {
+    if (connection) {
+        let sql = `SELECT * FROM mascota_historia WHERE id_cliente = ${connection.escape(id)}`;
+
+        connection.query(sql, (err, result) => {
+            if (result) {
+                let sql = `UPDATE mascota_historia SET eliminada="1" WHERE id_cliente = ${id}`;
+
+                connection.query(sql, (err, result2) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        callback(null, {
+                            msg: "Eliminado"
+                        })
+                    }
+                });
+            } else {
+                callback(err, {
+                    msg: "No existe"
+                })
+            }
+        })
+    }
+};
+
 // ---------- DETALLES ----------
 vetModel.getDetalle = (id, callback) => {
     if (connection) {
         connection.query(
             `SELECT * FROM detalle_historia WHERE id_historia=${connection.escape(id)} AND eliminado="0"`,
+            (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.getDetallesAdmin = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM detalle_historia WHERE eliminado=1',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.deleteDetallesAdmin = (callback) => {
+    if (connection) {
+        let sql = `DELETE FROM detalle_historia WHERE eliminado=1`;
+
+        connection.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                callback(null, {
+                    msg: "Eliminado"
+                })
+            }
+        });
+    }
+};
+
+vetModel.getUnicoDetalle = (id, callback) => {
+    if (connection) {
+        connection.query(
+            `SELECT * FROM detalle_historia WHERE id=${connection.escape(id)} AND eliminado="0"`,
             (err, rows) => {
                 if (err) {
                     throw err;
@@ -237,6 +433,32 @@ vetModel.deleteDetalle = (id, callback) => {
         connection.query(sql, (err, result) => {
             if (result) {
                 let sql = `UPDATE detalle_historia SET eliminado="1" WHERE id = ${id}`;
+
+                connection.query(sql, (err, result2) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        callback(null, {
+                            msg: "Eliminado"
+                        })
+                    }
+                });
+            } else {
+                callback(err, {
+                    msg: "No existe"
+                })
+            }
+        })
+    }
+};
+
+vetModel.deleteDetallesCliente = (id, callback) => {
+    if (connection) {
+        let sql = `SELECT * FROM detalle_historia WHERE id_historia = ${connection.escape(id)}`;
+
+        connection.query(sql, (err, result) => {
+            if (result) {
+                let sql = `UPDATE detalle_historia SET eliminada="1" WHERE id_historia = ${id}`;
 
                 connection.query(sql, (err, result2) => {
                     if (err) {
@@ -319,10 +541,56 @@ vetModel.deleteVacuna = (id, callback) => {
 
 
 // ---------- CONSULTAS ----------
+vetModel.getConsultasHistorial = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM consulta WHERE eliminada="0"',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.getConsultasAdmin = (callback) => {
+    if (connection) {
+        connection.query(
+            'SELECT * FROM consulta WHERE eliminada="1"',
+            (err, rows) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, rows);
+                }
+            }
+        );
+    }
+}
+
+vetModel.deleteConsultasAdmin = (callback) => {
+    if (connection) {
+        let sql = `DELETE FROM consulta WHERE eliminada=1`;
+
+        connection.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                callback(null, {
+                    msg: "Eliminado"
+                })
+            }
+        });
+    }
+};
+
 vetModel.getConsultas = (callback) => {
     if (connection) {
         connection.query(
-            'SELECT * FROM consulta WHERE estado="Activa" AND eliminada="0"',
+            'SELECT * FROM consulta WHERE finalizada=0 AND eliminada="0"',
             (err, rows) => {
                 if (err) {
                     throw err;
@@ -337,7 +605,7 @@ vetModel.getConsultas = (callback) => {
 vetModel.getConsulta = (id, callback) => {
     if (connection) {
         connection.query(
-            `SELECT * FROM consulta WHERE id=${connection.escape(id)} AND estado="Activa" AND eliminada="0"`,
+            `SELECT * FROM consulta WHERE id=${connection.escape(id)} AND finalizada=0  AND eliminada="0"`,
             (err, rows) => {
                 if (err) {
                     throw err;
@@ -352,7 +620,7 @@ vetModel.getConsulta = (id, callback) => {
 vetModel.getConsultasFecha = (fecha, callback) => {
     if (connection) {
         connection.query(
-            `SELECT * FROM consulta WHERE fecha=${connection.escape(fecha)} AND estado="Activa" AND eliminada="0" ORDER BY hora ASC`,
+            `SELECT * FROM consulta WHERE fecha=${connection.escape(fecha)} AND finalizada=0  AND eliminada="0" ORDER BY hora ASC`,
             (err, rows) => {
                 if (err) {
                     throw err;
@@ -385,7 +653,7 @@ vetModel.insertConsulta = (detalleConsulta, callback) => {
 
 vetModel.consultasPasadas = (fecha, callback) => {
     if (connection) {
-        let sql = `UPDATE consulta SET estado="Inactiva" WHERE fecha = ${fecha}`;
+        let sql = `UPDATE consulta SET finalizada=1 WHERE fecha = ${fecha}`;
         connection.query(sql, (err, result2) => {
             if (err) {
                 throw err;
@@ -412,6 +680,32 @@ vetModel.deleteConsulta = (id, callback) => {
                     } else {
                         callback(null, {
                             msg: "Eliminado"
+                        })
+                    }
+                });
+            } else {
+                callback(err, {
+                    msg: "No existe"
+                })
+            }
+        })
+    }
+};
+
+vetModel.finalizarConsulta = (id, callback) => {
+    if (connection) {
+        let sql = `SELECT * FROM consulta WHERE id = ${connection.escape(id)}`;
+
+        connection.query(sql, (err, result) => {
+            if (result) {
+                let sql = `UPDATE consulta SET finalizada=1 WHERE id = ${id}`;
+
+                connection.query(sql, (err, result2) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        callback(null, {
+                            msg: "Finalizada"
                         })
                     }
                 });
