@@ -88,6 +88,21 @@ vetModel.insertUsuario = (usuarioData, callback) => {
     }
 };
 
+vetModel.updateContra = (usuario, callback) => {
+    if (connection) {
+
+        var sql = `UPDATE usuario SET contra = ${connection.escape(usuario.contra)} WHERE id=${connection.escape(usuario.id)}`
+
+        connection.query(sql, function(error, result) {
+            if (error) {
+                throw error;
+            } else {
+                callback(null, { "msg": "Contraseña cambiada" });
+            }
+        });
+    }
+}
+
 // ---------- CLIENTES ----------
 vetModel.getClientes = (callback) => {
     if (connection) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClivetService } from '../../services/clivet.service';
+import * as crypto from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   login:boolean = false;
+  error:boolean = false;
 
   constructor( private clivet:ClivetService, private router:Router ) {}
 
@@ -24,16 +26,29 @@ export class LoginComponent implements OnInit {
 
   sesion(){
     this.login = true
-    let user = JSON.stringify(this.usuario);
+    this.error = false;
+    let duser = {
+      usuario: this.usuario.usuario,
+      contra: crypto.SHA512(this.usuario.contra).toString()
+    }
+    let user = JSON.stringify(duser);
     this.clivet.getUsuario(user)
       .subscribe( (data:any) => {
-        localStorage.setItem("id_user", data.id );
-        this.clivet.usuario = data;
-        this.clivet.id_user = data.id;
-        this.clivet.tipo_usuario = data.tipo;
-        this.login = false;
-        if (this.clivet.id_user != "") {
-          this.router.navigate(['/inicio']);
+        if(data == undefined){
+          this.login = false;
+          this.error = true;
+          this.usuario.usuario = ""
+          this.usuario.contra = ""
+          console.error("Usuario no encontrado")  
+        }else{
+          localStorage.setItem("id_user", data.id );
+          this.clivet.usuario = data;
+          this.clivet.id_user = data.id;
+          this.clivet.tipo_usuario = data.tipo;
+          this.login = false;
+          if (this.clivet.id_user != "") {
+            this.router.navigate(['/inicio']);
+          }
         }
       });
   }

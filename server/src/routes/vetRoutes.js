@@ -57,13 +57,28 @@ module.exports = function(app) {
         });
     });
 
+    app.put("/usuario/:id/:contra", (req, res) => {
+        var usuario = {
+            id: req.param('id'),
+            contra: req.param('contra')
+        };
+
+        Vet.updateContra(usuario, (error, data) => {
+            if (data && data.msg) {
+                res.json(200, data);
+            } else {
+                res.json(500, { "msg": "Error interno del servidor" });
+            }
+        });
+    });
+
     // ---------- CLIENTES ----------
     app.get('/clientes', (req, res) => {
         Vet.getClientes((err, data) => {
             res.json(data);
         })
     });
-    
+
     app.get('/clientes/admin', (req, res) => {
         Vet.getClientesAdmin((err, data) => {
             res.json(data);
@@ -464,7 +479,7 @@ module.exports = function(app) {
             }
         });
     });
-    
+
     app.put('/consulta/eliminar/:id', (req, res) => {
         Vet.deleteConsulta(req.params.id, (err, data) => {
             if (data) {

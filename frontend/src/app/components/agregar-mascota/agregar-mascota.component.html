@@ -31,7 +31,7 @@
                                 <div class="form-group form-row">
                                     <div class="col-md-6">
                                         <label for="tipo">Tipo:</label>
-                                        <select class="form-control" id="tipo" [(ngModel)]="mascota.tipo" name="tipo"  required>
+                                        <select class="form-control" id="tipo" [(ngModel)]="mascota.tipo" name="tipo" required>
                                             <option value="">Elija una opción...</option>
                                             <option value="Perro">Perro</option>
                                             <option value="Gato">Gato</option>
@@ -43,7 +43,7 @@
                                             <option value="">Elija una opción...</option>
                                             <option value="M">M</option>
                                             <option value="F">F</option>
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group form-row">
@@ -77,6 +77,16 @@
                                 <div class="form-group form-row">
                                     <label for="antecedentes">Antecedentes: </label>
                                     <textarea name="antecedentes" class="form-control" cols="30" rows="7" [(ngModel)]="mascota.antecedentes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorNombre">
+                                    El nombre solo puede contener letras.
+                                </div>
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorRaza">
+                                    La raza solo puede contener letras.
                                 </div>
                             </div>
                         </div>

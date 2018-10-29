@@ -24,8 +24,8 @@ import { ClientesAdministrarComponent } from './components/administrar/clientes-
 import { ConsultasAdministrarComponent } from './components/administrar/consultas-administrar.component';
 import { DetallesAdministrarComponent } from './components/administrar/detalles-administrar.component';
 import { MascotasAdministrarComponent } from './components/administrar/mascotas-administrar.component';
-import { MedicosAdministrarComponent } from './components/administrar/medicos-administrar.component';
 import { UsuariosAdministrarComponent } from './components/administrar/usuarios-administrar.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 export const ROUTES: Routes = [
     { path: 'sesion', component: LoginComponent},
@@ -51,8 +51,8 @@ export const ROUTES: Routes = [
     { path: 'administrar/consultas', component: ConsultasAdministrarComponent, canActivate:[ ClivetService ] },
     { path: 'administrar/detalles', component: DetallesAdministrarComponent, canActivate:[ ClivetService ] },
     { path: 'administrar/mascotas', component: MascotasAdministrarComponent, canActivate:[ ClivetService ] },
-    { path: 'administrar/medicos', component: MedicosAdministrarComponent, canActivate:[ ClivetService ] },
     { path: 'administrar/usuarios', component: UsuariosAdministrarComponent, canActivate:[ ClivetService ] },
+    { path: 'perfil', component: PerfilComponent, canActivate:[ ClivetService ] },
     { path: '', pathMatch: 'full', redirectTo: 'inicio'},
     { path: '**', pathMatch: 'full', redirectTo: 'error404'}
 ];

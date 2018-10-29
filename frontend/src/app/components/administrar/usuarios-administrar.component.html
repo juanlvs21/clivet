@@ -1,16 +1,16 @@
 <div class="animated fadeIn">
-  <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>&nbsp;Inicio</a></li>
-          <li class="breadcrumb-item"><a [routerLink]="['/administrar']"><i class="fa fa-dashboard"></i>&nbsp;Administrar</a></li>
-          <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/administrar/medicos']"><i class="fa fa-user"></i>&nbsp;Clientes</a></b></li>
-      </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>&nbsp;Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/administrar']"><i class="fa fa-dashboard"></i>&nbsp;Administrar</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><b><a [routerLink]="['/administrar/medicos']"><i class="fa fa-user"></i>&nbsp;Clientes</a></b></li>
+        </ol>
+    </nav>
 
-  <div class="container">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="box box-primary ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary ">
                     <div class="box-header with-border ">
                         <i class="fa fa-table "></i>Lista de Usuarios
                         <div style="float: right; ">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-2 offset-md-5 " *ngIf="cargando">
                             <div class="lds-css ng-scope " style="width: 50px; height: 50px ">
-                                <div class="lds-blocks " style="width:100%;height:100% ">
+                                <div class="lds-blocks " style="width:100%;height:100%;margin-left:30px">
                                     <div style="left:30px;top:30px;animation-delay:0s "></div>
                                     <div style="left:80px;top:30px;animation-delay:0.125s "></div>
                                     <div style="left:130px;top:30px;animation-delay:0.25s "></div>
@@ -33,14 +33,14 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <div class="row" *ngIf="!agregar">
+                        <div class="row animated fadeIn" *ngIf="!agregar">
                             <div class="col-md-12">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">Cédula</th>
-                                                <th class="text-center">Usuario</th>                            
+                                                <th class="text-center">Usuario</th>
                                                 <th class="text-center">Nombre</th>
                                                 <th class="text-center">Apellido</th>
                                                 <th class="text-center">Tipo</th>
@@ -50,7 +50,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th class="text-center">Cédula</th>
-                                                <th class="text-center">Usuario</th>                                      
+                                                <th class="text-center">Usuario</th>
                                                 <th class="text-center">Nombre</th>
                                                 <th class="text-center">Apellido</th>
                                                 <th class="text-center">Tipo</th>
@@ -81,57 +81,65 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container" *ngIf="agregar">
-                                <div class="col-md-12">
-                                    <div class="card mb-2">
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <h5>Registrar Usuario</h5>
-                                            </div>
-                                            <form (ngSubmit)="guardar()" #forma="ngForm">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-group form-row">
-                                                            <label for="ci">Cédula: </label>
-                                                            <input type="text" id="ci" class="form-control" name="ci" [(ngModel)]="usuario.ci" required>
-                                                        </div>
-                                                        <div class="form-group form-row">
-                                                            <label for="correo">Usuario: </label>
-                                                            <input type="text" class="form-control" name="usuario" id="usuario" [(ngModel)]="usuario.usuario" required>
-                                                        </div>
-                                                        <div class="form-group form-row">
-                                                            <label for="nombre">Nombre: </label>
-                                                            <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="usuario.nombre" required>
-                                                        </div>
-                                                        <div class="form-group form-row">
-                                                            <label for="apellido">Apellido: </label>
-                                                            <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="usuario.apellido" required>
-                                                        </div>
-                                                        <div class="form-group form-row">
-                                                            <label for="tipo">Tipo:</label>
-                                                            <select class="form-control" id="tipo" [(ngModel)]="usuario.tipo" name="tipo"  required>
-                                                                <option value="1">Administrador</option>
-                                                                <option value="2">Médico</option>
-                                                                <option value="3">Secretario</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="text-center">
-                                                            <button class="btn btn-success" type="submit" [disabled]="!forma.valid">Registrar&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                        <div class="container animated fadeIn" *ngIf="agregar">
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <div class="text-center">
+                                        <h5>Registrar Usuario</h5>
                                     </div>
+                                    <form (ngSubmit)="guardar()" #forma="ngForm">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="nombre">Nombre: </label>
+                                                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="usuario.nombre" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="apellido">Apellido: </label>
+                                                    <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="usuario.apellido" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="ci">Cédula: </label>
+                                                    <input type="text" id="ci" class="form-control" name="ci" [(ngModel)]="usuario.ci" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="correo">Usuario: </label>
+                                                    <input type="text" class="form-control" name="usuario" id="usuario" [(ngModel)]="usuario.usuario" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="tipo">Tipo:</label>
+                                                    <select class="form-control" id="tipo" [(ngModel)]="usuario.tipo" name="tipo" required>
+                                                            <option value="1">Administrador</option>
+                                                            <option value="2">Médico</option>
+                                                            <option value="3">Secretario</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="text-center">
+                                                    <button class="btn btn-success" type="submit" [disabled]="!forma.valid">Registrar&nbsp;<i *ngIf="cargando" class="fa fa-refresh fa-spin"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
                     </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,76 @@
+<div class="animated fadeIn">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/inicio']"><i class="fa fa-home"></i>Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/perfil']"><i class="fa fa-user"></i>&nbsp;{{clivet.usuario.nombre}}</a></li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <div class="text-center">
+                            <!-- <img class="profile-user-img img-responsive rounded img-circle" src="assets/img//48590997-icono-de-la-muestra-clínica-veterinaria.jpg" alt="User profile picture"> -->
+                        </div>
+                        <!-- <h3 class="profile-username text-center">{{usuario.nombre}}&nbsp;{{usuario.apellido}}</h3> -->
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b><i class="fa fa-star margin-r-5"></i>Cédula:</b> <a class="pull-right">{{clivet.usuario.ci}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b><i class="fa fa-bookmark margin-r-5"></i>Nombre:</b> <a class="pull-right">{{clivet.usuario.nombre}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b><i class="fa fa-bookmark margin-r-5"></i>Apellido:</b> <a class="pull-right">{{clivet.usuario.apellido}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b><i class="fa fa-gear margin-r-5"></i>Tipo:</b> <a class="pull-right">{{tipo}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6 ">
+                <div class="box box-primary ">
+                    <div class="text-center">
+                        <h5 class="box-title" style="margin-top:10px">Cambiar contraseña </h5>
+                    </div>
+                    <div class="box-body ">
+                        <div class="container">
+                            <form (ngSubmit)="cambiarContra()" #forma="ngForm">
+                                <div class="form-group form-row">
+                                    <label for="contra">Contraseña: </label>
+                                    <input type="password" class="form-control" name="contra" id="contra" placeholder="Contraseña" [(ngModel)]="usuario.contra" required>
+                                </div>
+                                <div class="form-group form-row">
+                                    <label for="repetir">Repita su contraseña: </label>
+                                    <input type="password" class="form-control" name="repetir" id="repetir" placeholder="Repita su contraseña" [(ngModel)]="usuario.repetir" required>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center">
+                                        <div class="alert alert-danger" role="alert" *ngIf="noCoinciden">
+                                            Contraseñas no coinciden.
+                                        </div>
+                                        <div class="alert alert-success" role="alert" *ngIf="contaGuardada">
+                                            Contraseña guardada exitosamente.
+                                        </div>
+                                        <button class="btn btn-success" type="submit" [disabled]="(!forma.valid)||(cambiando)">
+                                          <span *ngIf="!cambiando">Cambiar contraseña </span>
+                                          <span *ngIf="cambiando">Cambiando contraseña <i class="fa fa-refresh fa-spin"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>

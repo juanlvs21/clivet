@@ -74,6 +74,20 @@ nuevoUsuario (usuario: Usuario): Observable<Usuario> {
   );
 }
 
+updateContra(id:string, contra:string){
+  let body = JSON.stringify(contra);
+
+  let url = `${this.url}usuario/${id}/${contra}`;
+
+  return this.http.put( url , body)
+    .pipe(
+      map( res => {
+        console.log(res);
+        return res;
+      })
+    );
+}
+
 // ---------- CLIENTE -----------
   getClientes(){
     return this.http.get(`${this.url}clientes`);

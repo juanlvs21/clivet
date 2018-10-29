@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClivetService } from '../../services/clivet.service';
 import { Usuario } from '../../interfaces/usuario.interface';
+import * as crypto from 'crypto-js';
 
 @Component({
   selector: 'app-usuarios-administrar',
@@ -18,7 +19,7 @@ export class UsuariosAdministrarComponent implements OnInit {
     nombre: "",
     apellido: "",
     tipo: 0,
-    contra: "12345"
+    contra: crypto.SHA512("12345").toString()
   }
 
   cargando:boolean = false;
@@ -60,6 +61,11 @@ export class UsuariosAdministrarComponent implements OnInit {
       .subscribe( data => {
         this.cargando = false;
         this.agregar = false;
+        this.usuario.ci = ""
+        this.usuario.usuario = ""
+        this.usuario.nombre = ""
+        this.usuario.apellido = ""
+        this.usuario.tipo = 0
         this.getUsuarios()
       },
       error => {
@@ -68,7 +74,7 @@ export class UsuariosAdministrarComponent implements OnInit {
         this.agregar = false;
       })
   }
-
+    
   tarjetaregistrar(){
     this.agregar = true;
   }

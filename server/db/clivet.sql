@@ -82,7 +82,7 @@ CREATE TABLE vacunas(
 CREATE TABLE usuarios(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50),
-    contra VARCHAR(100),
+    contra VARCHAR(200),
     nombre VARCHAR(40) NOT NULL,
     apellido VARCHAR(40) NOT NULL,
     tipo INT NOT NULL DEFAULT 0

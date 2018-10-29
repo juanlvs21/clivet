@@ -50,6 +50,22 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorCi">
+                                    La cédula solo puede contener números.
+                                </div>
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorNombre">
+                                    El nombre solo puede contener letras.
+                                </div>
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorApellido">
+                                    El apellido solo puede contener letras.
+                                </div>
+                                <div class="alert alert-danger text-center" role="alert" *ngIf="errorTelefono">
+                                    La teléfono solo puede contener números.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error == true">
                                     <strong>¡ERROR!</strong> Ha ocurrido un problema desconocido, intente más tarde.

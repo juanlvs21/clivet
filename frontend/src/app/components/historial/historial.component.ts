@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClivetService } from '../../services/clivet.service';
 import { Consulta } from '../../interfaces/consulta.interface';
 import { Mascota } from '../../interfaces/mascota.interface';
-import { Medico } from '../../interfaces/medico.interface';
+import { Usuario } from '../../interfaces/usuario.interface';
 
 @Component({
   selector: 'app-historial',
@@ -14,7 +14,8 @@ export class HistorialComponent implements OnInit {
   consultas:Consulta[] = [];
   consultasFecha:Consulta[] = [];
   mascotas:Mascota[] = [];
-  medicos:Medico[] = [];
+  medicos:Usuario[] = [];
+  listaMedico:Usuario[] = [];
 
   cargando:boolean = false;
   
@@ -48,10 +49,15 @@ export class HistorialComponent implements OnInit {
   
   // ----- MEDICOS -----
   getMedicos(){
-    this.clivet.getMedicos()
-      .subscribe( (data:Medico[]) => {
+    this.clivet.getUsuarios()
+      .subscribe( (data:Usuario[]) => {
+        this.listaMedico = data
+        for (let i = 0; i < this.listaMedico.length; i++) {
+          if (this.listaMedico[i].tipo == 2) {
+            this.medicos.push(this.listaMedico[i])
+          }
+        }
         this.cargando = false;
-        this.medicos = data;
       });
   }
 

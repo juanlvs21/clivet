@@ -89,8 +89,13 @@
                     </span> -->
                 </a>
             </li>
+            <li routerLinkActive="active" *ngIf="clivet.id_user != ''">
+                <a [routerLink]="['perfil']">
+                    <i class="fa fa-user"></i> <span>Perfil</span>
+                </a>
+            </li>
             <li routerLinkActive="active" *ngIf="clivet.id_user == ''">
-                <a (click)="salir()" [routerLink]="['/sesion']">
+                <a [routerLink]="['/sesion']">
                     <i class="fa fa-sign-in"></i> <span>Iniciar Sesión</span>
                     <!-- <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>

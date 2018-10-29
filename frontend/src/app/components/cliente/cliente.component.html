@@ -18,16 +18,16 @@
                         <h3 class="profile-username text-center">{{cliente.nombre}}&nbsp;{{cliente.apellido}}</h3>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b><i class="fa fa-book margin-r-5"></i>Cédula:</b> <a class="pull-right">{{cliente.ci}}</a>
+                                <b><i class="fa fa-star margin-r-5"></i>Cédula:</b> <a class="pull-right">{{cliente.ci}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fa fa-book margin-r-5"></i>Correo:</b> <a class="pull-right">{{cliente.correo}}</a>
+                                <b><i class="fa fa-envelope margin-r-5"></i>Correo:</b> <a class="pull-right">{{cliente.correo}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fa fa-book margin-r-5"></i>Teléfono:</b> <a class="pull-right">{{cliente.telefono}}</a>
+                                <b><i class="fa fa-asterisk margin-r-5"></i>Teléfono:</b> <a class="pull-right">{{cliente.telefono}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fa fa-book margin-r-5"></i>Dirección:</b> <a class="pull-right">{{cliente.direccion}}</a>
+                                <b><i class="fa fa-map-marker margin-r-5"></i>Dirección:</b> <a class="pull-right">{{cliente.direccion}}</a>
                             </li>
                             <li class="list-group-item">
                                 <button class="btn btn-danger btn-sm" style="margin-left:40%" (click)="eliminarCliente()">Eliminar</button>
@@ -108,7 +108,7 @@
                                         <td class="text-center"> {{ mascota.raza }} </td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-sm " role="group " aria-label="Basic example ">
-                                                <button type="button " class="btn btn-primary "title="Agregar Mascota " [routerLink]="[ '/mascota', mascota.id] "><i class="fa fa-eye " style="margin:4px "></i></button>
+                                                <button type="button " class="btn btn-primary " title="Agregar Mascota " [routerLink]="[ '/mascota', mascota.id] "><i class="fa fa-eye " style="margin:4px "></i></button>
                                                 <button type="button " class="btn btn-danger " title="Eliminar Usuario " (click)="eliminarMascota(mascota.id) "><i class="fa fa-trash " style="margin:5px "></i></button>
                                             </div>
                                         </td>

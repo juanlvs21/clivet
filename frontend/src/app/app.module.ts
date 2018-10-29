@@ -40,7 +40,7 @@ import { ConsultasAdministrarComponent } from './components/administrar/consulta
 import { DetallesAdministrarComponent } from './components/administrar/detalles-administrar.component';
 import { ClientesAdministrarComponent } from './components/administrar/clientes-administrar.component';
 import { UsuariosAdministrarComponent } from './components/administrar/usuarios-administrar.component';
-import { MedicosAdministrarComponent } from './components/administrar/medicos-administrar.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,7 @@ import { MedicosAdministrarComponent } from './components/administrar/medicos-ad
     DetallesAdministrarComponent,
     ClientesAdministrarComponent,
     UsuariosAdministrarComponent,
-    MedicosAdministrarComponent
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
