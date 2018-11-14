@@ -17,12 +17,12 @@ Sistema de control de consultas veterinarias:
 
 - `Requisito general`.
     - [Nodejs](https://nodejs.org/es/).
-    - [Gestor de base de datos](https://www.apachefriends.org/es/index.html), En este caso usamos XAMPP.
+    - [Gestor de base de datos](https://www.apachefriends.org/es/index.html), En este caso usamos MySQL/MariaDB que trae XAMPP.
 
 - `Frontend`.
     - Para realizar la instalación debe abrir la carpeta `frontend` en el terminal/cmd.
     - Instalación mediante npm (npm es el gestor de paquetes de Nodejs): 
-        - Angular CLI: `npm install -g @angular/cli`.
+        - Angular CLI: `npm install -g @angular/cli` (Si desea tener Angular de manera global).
         - `npm install` (Instala todos los paquetes adicionales usados, Ej: `ng2-charts`). 
 
 - `Server`.
@@ -30,7 +30,7 @@ Sistema de control de consultas veterinarias:
     - Instalación mediante npm (Gestor de paquetes de Nodejs): 
         - `npm install` (Instala todos los paquetes adicionales usados, Ej: `express, mysql`). 
 
-## Uso de la aplicación
+## Ejecución de la aplicación
 
 - `Frontend`.
     - Para realizar la instalación debe abrir la carpeta `frontend` en el terminal/cmd.
