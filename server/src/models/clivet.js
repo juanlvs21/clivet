@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const atob = require('atob');
 
 connection = mysql.createConnection({
     host: 'localhost',
@@ -11,8 +12,8 @@ let vetModel = {};
 
 // ---------- USUARIOS ----------
 vetModel.getUsuario = (usuario, callback) => {
-
-    let user = JSON.parse(usuario);
+    let decode = atob(usuario, 'base64');
+    let user = JSON.parse(decode);
 
     if (connection) {
         connection.query(

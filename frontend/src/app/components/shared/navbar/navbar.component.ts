@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   salir(){
     if (confirm('¿Desea cerrar sesión?')) {
-      this.clivet.id_user = "";
+      // this.clivet.id_user = "";
+      this.clivet.token = "";
       localStorage.clear();
       this.router.navigate(['/sesion']);
     }else{

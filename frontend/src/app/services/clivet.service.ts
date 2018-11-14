@@ -17,25 +17,31 @@ export class ClivetService {
 
   usuario:Usuario;
 
-  id_user:string = ""
+  token:string = "";
+
+  // id_user:string = ""
   tipo_usuario:number = 0;
 
   url = 'http://localhost:3000/';
 
   constructor( private http:HttpClient, private router:Router  ) {
-    if(localStorage.getItem("id_user") == null){
-      this.id_user = "";
+    if(localStorage.getItem("token_user") == null){
+      this.token = "";
     }else{
-      this.id_user = localStorage.getItem("id_user");
+      this.token = localStorage.getItem("token_user");
+      this.getUsuario(this.token)
+        .subscribe( data => {
+          console.log(data)
+          this.usuario = data
+        })
     }  
   }
 
   canActivate(next:ActivatedRouteSnapshot, state:RouterStateSnapshot){
   
-    if(this.id_user != ""){
+    if(this.token != ""){
       return true;
     }else{
-      // alert("Error de seguridad - Debe iniciar sesión");
       this.router.navigate(['/sesion']);
       return false;
     }
@@ -378,5 +384,3 @@ updateContra(id:string, contra:string){
     return this.http.get(`${this.url}medicos`);
   }   
 }
-
-// https://www.uno-de-piera.com/httpclient-angular-5/

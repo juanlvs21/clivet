@@ -44,7 +44,7 @@ export class PerfilComponent implements OnInit {
     this.contaGuardada = false
     if (this.usuario.contra == this.usuario.repetir) {
       let pass = crypto.SHA512(this.usuario.contra).toString()
-      this.clivet.updateContra(this.clivet.id_user, pass)
+      this.clivet.updateContra(this.clivet.usuario.ci, pass)
         .subscribe( () => {
           this.cambiando = false
           this.usuario.contra = ''

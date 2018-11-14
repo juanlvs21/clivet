@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       usuario: this.usuario.usuario,
       contra: crypto.SHA512(this.usuario.contra).toString()
     }
-    let user = JSON.stringify(duser);
+    let user = btoa(JSON.stringify(duser))
     this.clivet.getUsuario(user)
       .subscribe( (data:any) => {
         if(data == undefined){
@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
           this.usuario.contra = ""
           console.error("Usuario no encontrado")  
         }else{
-          localStorage.setItem("id_user", data.id );
+          localStorage.setItem("token_user", user);
           this.clivet.usuario = data;
-          this.clivet.id_user = data.id;
-          this.clivet.tipo_usuario = data.tipo;
+          this.clivet.token = user;
+          // this.clivet.tipo_usuario = data.tipo;
           this.login = false;
-          if (this.clivet.id_user != "") {
+          if (this.clivet.token != "") {
             this.router.navigate(['/inicio']);
           }
         }

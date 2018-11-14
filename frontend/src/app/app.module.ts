@@ -78,7 +78,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     HttpClientModule,
     FormsModule,
     ChartsModule,
-    RouterModule.forRoot( ROUTES )
+    RouterModule.forRoot( ROUTES, {useHash:true} )
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -145,20 +145,6 @@ module.exports = function(app) {
             }
         });
     });
-    // app.delete('/clientes/:id', (req, res) => {
-    //     Vet.deleteCliente(req.params.id, (err, data) => {
-    //         if (data && (data.msg === "Eliminado" || data.msg === "No existe")) {
-    //             res.json({
-    //                 success: true,
-    //                 data
-    //             })
-    //         } else {
-    //             res.status(500).json({
-    //                 msg: "Error interno del servidor"
-    //             })
-    //         }
-    //     })
-    // });
     // ---------- MASCOTAS ----------
     app.get('/mascotas', (req, res) => {
         Vet.getMascotas((err, data) => {
