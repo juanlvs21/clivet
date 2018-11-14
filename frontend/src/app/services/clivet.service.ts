@@ -19,7 +19,6 @@ export class ClivetService {
 
   token:string = "";
 
-  // id_user:string = ""
   tipo_usuario:number = 0;
 
   url = 'http://localhost:3000/';

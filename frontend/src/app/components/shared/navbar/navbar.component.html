@@ -50,17 +50,6 @@
                     <a href="#" *ngIf="clivet.usuario.tipo == 3"><i class="fa fa-star text-success"></i> Secretario</a>
                 </div>
             </div>
-            <!-- search form -->
-            <!-- <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                </span>
-                </div>
-            </form> -->
-            <!-- /.search form -->
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -71,7 +60,7 @@
                     <i class="fa fa-home"></i> <span>Inicio</span>
                 </a>
             </li>
-            <li routerLinkActive="active" *ngIf="(clivet.token != '')&&(clivet.tipo_usuario == 1)">
+            <li routerLinkActive="active" *ngIf="(clivet.token != '')&&(clivet.usuario.tipo == 1)">
                 <a [routerLink]="['administrar']">
                     <i class="fa fa-dashboard"></i> <span>Administrar</span>
                 </a>

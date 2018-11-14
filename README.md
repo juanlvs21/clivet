@@ -46,3 +46,18 @@ Sistema de control de consultas veterinarias:
     - Para realizar la instalación debe abrir la carpeta `server` en el terminal/cmd.
     - Comando para iniciar la API que hace las consultas a la base de datos:
         - `npm start`: Inicia el servidor de la API en `localhost:3000`.
+
+## Uso de la aplicación
+
+Existen 3 tipos de usuarios (`Medico, Secretario, Administrado`). Las funciones de crear y eliminar usuarios han sidos desactivadas en la demostración para evitar accidentes o malas intenciones, la finalidad es que todos puedan apreciar este sistema.
+
+Usuarios:
+    - Medico:
+        - Usuario: `medico`
+        - Contraseña: `medico`
+    - Secretaria:
+        - Usuario: `secretaria`
+        - Contraseña: `secretaria`
+    - Administrador:
+        - Usuario: `admin`
+        - Contraseña: `admin`
