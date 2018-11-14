@@ -52,12 +52,13 @@ Sistema de control de consultas veterinarias:
 Existen 3 tipos de usuarios (`Medico, Secretario, Administrado`). Las funciones de crear y eliminar usuarios han sidos desactivadas en la demostración para evitar accidentes o malas intenciones, la finalidad es que todos puedan apreciar este sistema.
 
 Usuarios:
-    - Medico:
-        - Usuario: `medico`
-        - Contraseña: `medico`
-    - Secretaria:
-        - Usuario: `secretaria`
-        - Contraseña: `secretaria`
-    - Administrador:
-        - Usuario: `admin`
-        - Contraseña: `admin`
+
+- Medico:
+    - Usuario: `medico`
+    - Contraseña: `medico`
+- Secretaria:
+    - Usuario: `secretaria`
+    - Contraseña: `secretaria`
+- Administrador:
+    - Usuario: `admin`
+    - Contraseña: `admin`
