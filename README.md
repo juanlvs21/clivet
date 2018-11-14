@@ -15,7 +15,7 @@ Sistema de control de consultas veterinarias:
 
 <br>
 
-<p align="center" href="https://clivet.now.sh/">Demostración</a>
+<a align="center" href="https://clivet.now.sh/">Demostración</a>
 
 ## Instalaciones requeridas
 
