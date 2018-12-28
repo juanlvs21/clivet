@@ -15,7 +15,7 @@ Sistema de control de consultas veterinarias:
 
 <br>
 
-<a align="center" href="https://clivet.now.sh/">Demostración</a>
+<a align="center" href="https://clivet.now.sh/">Demostración</a> `(Actualmente la demo se encuentra sin base de datos, ya que los servicios de bases de datos mysql gratis con el tiempo son borrados)`
 
 ## Instalaciones requeridas
 
